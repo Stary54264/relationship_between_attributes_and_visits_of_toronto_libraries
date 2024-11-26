@@ -198,7 +198,103 @@ To write a **Parquet file** in R, you can use the **`arrow`** package, which pro
 This approach is lightweight, efficient, and ideal for large datasets!
 
 User
+is it janitor in tidyverse
 
+ChatGPT
+The **`janitor`** package is **not officially part of the tidyverse**, but it integrates seamlessly with the tidyverse ecosystem because it is designed to work well with **dplyr**, **tidyr**, and other tidyverse packages. While the tidyverse is a collection of core packages (like ggplot2, dplyr, and tidyr), janitor is an independent package focused on data cleaning.
+
+---
+
+### **What janitor Does**
+The janitor package provides tools to:
+- **Clean column names**: Make column names syntactically valid and consistent using `clean_names()`.
+- **Handle duplicate rows**: Use `get_dupes()` to find duplicate rows.
+- **Summarize data**: Create cross-tabulations with `tabyl()`.
+- **Work with missing data**: Tools like `adorn_totals()` and `adorn_percentages()` help format summaries effectively.
+
+---
+
+### **Example: Cleaning Column Names with `janitor`**
+```R
+library(dplyr)
+library(janitor)
+
+# Sample dataset with messy column names
+df <- data.frame(
+  "First Name" = c("Alice", "Bob"),
+  "Age (years)" = c(25, 30),
+  check.names = FALSE
+)
+
+# Clean column names
+df_clean <- df %>%
+  clean_names()
+
+print(df_clean)
+# Output: 
+#   first_name age_years
+# 1      Alice        25
+# 2        Bob        30
+```
+
+---
+
+### **Relationship with the tidyverse**
+- **Not part of the tidyverse core**: You need to install janitor separately using `install.packages("janitor")`.
+- **Works with tidyverse principles**: It’s designed to work with data frames and supports piping (`%>%`) natively.
+
+If you're using the tidyverse for data wrangling, **janitor** is a great complementary package for cleaning and organizing messy datasets.
+
+
+User
+but why i can use the functions even if i didn't library it?
+
+ChatGPT
+You can use functions from a package like **`janitor`** without explicitly calling `library(janitor)` if the package has been loaded as a dependency by another package or script. Here’s why this can happen:
+
+---
+
+### **1. Loaded as a Dependency of Another Package**
+Some tidyverse packages (e.g., **dplyr**, **tidyr**) or other packages might import or depend on janitor. If one of those packages is loaded using `library()`, its dependencies are also made available in your session. For example:
+   - If a package *imports* functions from janitor, those functions can be used without explicitly loading janitor.
+
+**Example:**
+```R
+library(dplyr)  # Hypothetically, if janitor was imported by dplyr
+data.frame(A = c(1, 2)) %>%
+  janitor::clean_names()  # Works without explicitly calling library(janitor)
+```
+
+---
+
+### **2. Fully Qualified Function Calls**
+Even if you don’t explicitly load a package using `library()`, you can use functions from that package if you prefix the function name with the package name, like `janitor::clean_names()`. This is a fully qualified call and does not require loading the package into your namespace.
+
+---
+
+### **3. Package Attached by RStudio or an IDE**
+If you're working in an IDE like **RStudio** and opened a script that already calls janitor or installed it in your session, it might be auto-attached to your environment.
+
+---
+
+### **Check if Janitor is Attached**
+You can confirm whether janitor is attached or loaded in your current session using:
+```R
+search()  # Lists all attached packages
+```
+
+Or check if it’s loaded into memory but not attached:
+```R
+"janitor" %in% loadedNamespaces()  # Returns TRUE if janitor is loaded
+```
+
+---
+
+### **Best Practice**
+To avoid ambiguity and ensure reproducibility, explicitly call `library(janitor)` at the beginning of your script, even if the functions seem to work without it. This makes your code easier to understand and avoids surprises if package dependencies change.
+
+
+User
 
 ChatGPT
 
