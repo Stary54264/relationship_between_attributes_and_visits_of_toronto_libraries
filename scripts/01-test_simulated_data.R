@@ -20,9 +20,9 @@ test_that("dataset has 50 rows", {
   expect_equal(nrow(data), 50)
 })
 
-# Test that the dataset has 8 columns
-test_that("dataset has 8 columns", {
-  expect_equal(ncol(data), 8)
+# Test that the dataset has 6 columns
+test_that("dataset has 6 columns", {
+  expect_equal(ncol(data), 6)
 })
 
 # Test that the 'name' column is character type
@@ -48,16 +48,6 @@ test_that("'dih' is numeric", {
 # Test that the 'workstations' column is numeric type
 test_that("'workstations' is numeric", {
   expect_true(all(is.numeric(data$workstations)))
-})
-
-# Test that the 'lat' column is numeric type
-test_that("'lat' is numeric", {
-  expect_true(all(is.numeric(data$lat)))
-})
-
-# Test that the 'long' column is numeric type
-test_that("'long' is numeric", {
-  expect_true(all(is.numeric(data$long)))
 })
 
 # Test that the 'year' column is numeric type
@@ -88,16 +78,6 @@ test_that("'dih' column is 0 or 1", {
 # Test that the 'workstations' column is above 0
 test_that("'workstations' column is above 0", {
   expect_true(all(data$workstations >= 0))
-})
-
-# Test that the 'lat' column is between 43 and 44
-test_that("'lat' column is above 0", {
-  expect_true(all(data$lat > 43) && all(data$lat < 44))
-})
-
-# Test that the 'long' column is between -80 and -79
-test_that("'long' column is between -80 and -79", {
-  expect_true(all(data$long > -80) && all(data$long < -79))
 })
 
 # Test that the 'year' column is above 0

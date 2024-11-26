@@ -22,8 +22,6 @@ simulated_data <- tibble(
   parking = round(rexp(50, 0.1)),
   dih = sample(c(0, 1), 50, replace = TRUE, p = c(0.7, 0.3)),
   workstations = round(rexp(50, 0.1)),
-  lat = round(runif(50, 43, 44), 3),
-  long = round(runif(50, -80, -79), 3),
   year = round(runif(50, 0, 100))
 )
 
