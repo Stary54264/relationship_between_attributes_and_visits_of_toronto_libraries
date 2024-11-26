@@ -17,8 +17,8 @@ set.seed(1125)
 
 # Create a dataset by randomly assigning states and parties to divisions
 simulated_data <- tibble(
-  branch_name = rep("XXX", 50),
-  square_footage = round(rexp(50, 1 / 20000)),
+  name = rep("XXX", 50),
+  area = round(rexp(50, 1 / 20000)),
   facilities = rbinom(50, 7, 0.3),
   workstations = round(rexp(50, 1 / 10)),
   year = round(runif(50, 1900, 2024))
