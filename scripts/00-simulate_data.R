@@ -21,7 +21,7 @@ simulated_data <- tibble(
   area = round(rexp(50, 1 / 20000)),
   facilities = rbinom(50, 7, 0.3),
   workstations = round(rexp(50, 1 / 10)),
-  year = round(runif(50, 1900, 2024))
+  year = round(runif(50, 0, 100))
 )
 
 
