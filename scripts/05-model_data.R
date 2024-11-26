@@ -11,6 +11,7 @@
 
 #### Workspace setup ####
 library(tidyverse)
+library(rstanarm)
 library(arrow)
 
 
@@ -19,7 +20,13 @@ data <- read_parquet("data/02-analysis_data/analysis_data.parquet")
 
 
 ### Model data ####
-model <- lm(area ~ facilities + workstations + year, data = data)
+model <- stan_glm(
+    formula = dih ~ area + parking + workstations + year,
+    data = data,
+    family = binomial(link = "logit"),
+    prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
+    prior_intercept = normal(location = -1, scale = 2.5, autoscale = TRUE),
+    seed = 1125)
 
 
 #### Save model ####
