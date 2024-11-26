@@ -20,12 +20,12 @@ cleaned_data <- raw_data |>
   janitor::clean_names() |>
   filter(physical_branch == 1) |>
   mutate(facilities = kids_stop + leading_reading + clc + dih +
-           teen_council + youth_hub + adult_literacy_program) |>
+           teen_council + youth_hub + adult_literacy_program,
+         year = 2024 - present_site_year) |>
   select(branch_name, square_footage, facilities,
-         workstations, present_site_year) |>
+         workstations, year) |>
   rename(name = branch_name,
-         area = square_footage,
-         year = present_site_year) |>
+         area = square_footage) |>
   tidyr::drop_na()
 
 

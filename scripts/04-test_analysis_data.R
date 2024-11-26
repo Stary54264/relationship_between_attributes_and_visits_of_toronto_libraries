@@ -72,7 +72,7 @@ test_that("'workstations' column is above 0", {
   expect_true(all(data$workstations >= 0))
 })
 
-# Test that the 'year' column is below 2024
-test_that("'year' column is below 2024", {
-  expect_true(all(data$year <= 2024))
+# Test that the 'year' column is above 0
+test_that("'year' column is above 0", {
+  expect_true(all(data$year >= 0))
 })
