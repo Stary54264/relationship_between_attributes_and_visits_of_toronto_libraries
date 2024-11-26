@@ -27,4 +27,4 @@ cleaned_data <- raw_data |>
 
 
 #### Save data ####
-write_parquet(raw_data, "data/02-analysis_data/analysis_data.parquet")
+write_parquet(cleaned_data, "data/02-analysis_data/analysis_data.parquet")
