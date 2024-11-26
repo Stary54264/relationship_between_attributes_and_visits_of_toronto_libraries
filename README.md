@@ -42,11 +42,11 @@ There is no sign this is a class project. Check the rproj and folder names, the 
 
 A separate paragraph or dot point must be included in the README about whether LLMs were used, and if so how. If auto-complete tools such as co-pilot were used this must be mentioned. If chat tools such as ChatGPT, were used then the entire chat must be included in the usage text file. If not, then paper gets 0 overall.
 
-- [ ] Title
+- [X] Title
 
 An informative title is included that explains the story, and ideally tells the reader what happens at the end of it. 'Paper X' is not an informative title. Use a subtitle to convey the main finding. Do not use puns (you can break this rule once you're experienced).
 
-- [ ] Author, date, and repo
+- [X] Author, date, and repo
 
 The author, date of submission in unambiguous format, and a link to a GitHub repo are clearly included. (The later likely, but not necessarily, through a statement such as: 'Code and data supporting this analysis is available at: LINK').
 
