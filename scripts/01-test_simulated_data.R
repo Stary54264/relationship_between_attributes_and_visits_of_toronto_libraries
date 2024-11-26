@@ -1,89 +1,76 @@
 #### Preamble ####
-# Purpose: Tests the structure and validity of the simulated Australian 
-  #electoral divisions dataset.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Purpose: Tests the validity of the simulated Toronto libraries dataset.
+# Author: Yanzun Jiang
+# Date: 25 November 2024
+# Contact: yanzun.jiang@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: 
-  # - The `tidyverse` package must be installed and loaded
-  # - 00-simulate_data.R must have been run
-# Any other information needed? Make sure you are in the `starter_folder` rproj
+# Pre-requisites: Should have simulated the dataset.
+# Any other information needed? None.
 
 
 #### Workspace setup ####
 library(tidyverse)
 
-analysis_data <- read_csv("data/00-simulated_data/simulated_data.csv")
-
-# Test if the data was successfully loaded
-if (exists("analysis_data")) {
-  message("Test Passed: The dataset was successfully loaded.")
-} else {
-  stop("Test Failed: The dataset could not be loaded.")
-}
-
 
 #### Test data ####
+data <- read_csv("data/00-simulated_data/simulated_data.csv")
 
-# Check if the dataset has 151 rows
-if (nrow(analysis_data) == 151) {
-  message("Test Passed: The dataset has 151 rows.")
-} else {
-  stop("Test Failed: The dataset does not have 151 rows.")
-}
+# Test that the dataset has 50 rows
+test_that("dataset has 50 rows", {
+  expect_equal(nrow(data), 50)
+})
 
-# Check if the dataset has 3 columns
-if (ncol(analysis_data) == 3) {
-  message("Test Passed: The dataset has 3 columns.")
-} else {
-  stop("Test Failed: The dataset does not have 3 columns.")
-}
+# Test that the dataset has 5 columns
+test_that("dataset has 5 columns", {
+  expect_equal(ncol(data), 5)
+})
 
-# Check if all values in the 'division' column are unique
-if (n_distinct(analysis_data$division) == nrow(analysis_data)) {
-  message("Test Passed: All values in 'division' are unique.")
-} else {
-  stop("Test Failed: The 'division' column contains duplicate values.")
-}
+# Test that the 'name' column is character type
+test_that("'name' is character", {
+  expect_true(all(is.character(data$name)))
+})
 
-# Check if the 'state' column contains only valid Australian state names
-valid_states <- c("New South Wales", "Victoria", "Queensland", "South Australia", 
-                  "Western Australia", "Tasmania", "Northern Territory", 
-                  "Australian Capital Territory")
+# Test that the 'area' column is numeric type
+test_that("'area' is numeric", {
+  expect_true(all(is.numeric(data$area)))
+})
 
-if (all(analysis_data$state %in% valid_states)) {
-  message("Test Passed: The 'state' column contains only valid Australian state names.")
-} else {
-  stop("Test Failed: The 'state' column contains invalid state names.")
-}
+# Test that the 'facilities' column is numeric type
+test_that("'facilities' is numeric", {
+  expect_true(all(is.numeric(data$facilities)))
+})
 
-# Check if the 'party' column contains only valid party names
-valid_parties <- c("Labor", "Liberal", "Greens", "National", "Other")
+# Test that the 'workstations' column is numeric type
+test_that("'workstations' is numeric", {
+  expect_true(all(is.numeric(data$workstations)))
+})
 
-if (all(analysis_data$party %in% valid_parties)) {
-  message("Test Passed: The 'party' column contains only valid party names.")
-} else {
-  stop("Test Failed: The 'party' column contains invalid party names.")
-}
+# Test that the 'year' column is numeric type
+test_that("'year' is numeric", {
+  expect_true(all(is.numeric(data$year)))
+})
 
-# Check if there are any missing values in the dataset
-if (all(!is.na(analysis_data))) {
-  message("Test Passed: The dataset contains no missing values.")
-} else {
-  stop("Test Failed: The dataset contains missing values.")
-}
+# Test that there are no missing values in the dataset
+test_that("no missing values in dataset", {
+  expect_true(all(!is.na(data)))
+})
 
-# Check if there are no empty strings in 'division', 'state', and 'party' columns
-if (all(analysis_data$division != "" & analysis_data$state != "" & analysis_data$party != "")) {
-  message("Test Passed: There are no empty strings in 'division', 'state', or 'party'.")
-} else {
-  stop("Test Failed: There are empty strings in one or more columns.")
-}
+# Test that the 'area' column is above 0
+test_that("'area' column is above 0", {
+  expect_true(all(data$area >= 0))
+})
 
-# Check if the 'party' column has at least two unique values
-if (n_distinct(analysis_data$party) >= 2) {
-  message("Test Passed: The 'party' column contains at least two unique values.")
-} else {
-  stop("Test Failed: The 'party' column contains less than two unique values.")
-}
+# Test that the 'facilities' column is between 0 and 7
+test_that("'facilities' column is between 0 and 7", {
+  expect_true(all(data$facilities >= 0) && all(data$facilities <= 7))
+})
+
+# Test that the 'workstations' column is above 0
+test_that("'workstations' column is above 0", {
+  expect_true(all(data$workstations >= 0))
+})
+
+# Test that the 'year' column is below 2024
+test_that("'year' column is below 2024", {
+  expect_true(all(data$year <= 2024))
+})

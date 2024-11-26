@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of Toronto Libraries.
+# Purpose: Simulates a dataset of Toronto libraries.
 # Author: Yanzun Jiang
 # Date: 25 November 2024
 # Contact: yanzun.jiang@mail.utoronto.ca
