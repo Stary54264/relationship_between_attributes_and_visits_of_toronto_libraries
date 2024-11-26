@@ -27,14 +27,14 @@ test_that("dataset has 5 columns", {
   expect_equal(ncol(data), 5)
 })
 
-# Test that the 'branch_name' column is character type
-test_that("'branch_name' is character", {
-  expect_true(all(is.character(data$branch_name)))
+# Test that the 'name' column is character type
+test_that("'name' is character", {
+  expect_true(all(is.character(data$name)))
 })
 
-# Test that the 'square_footage' column is numeric type
-test_that("'square_footage' is numeric", {
-  expect_true(all(is.numeric(data$square_footage)))
+# Test that the 'area' column is numeric type
+test_that("'area' is numeric", {
+  expect_true(all(is.numeric(data$area)))
 })
 
 # Test that the 'facilities' column is numeric type
@@ -47,9 +47,9 @@ test_that("'workstations' is numeric", {
   expect_true(all(is.numeric(data$workstations)))
 })
 
-# Test that the 'present_site_year' column is numeric type
-test_that("'present_site_year' is numeric", {
-  expect_true(all(is.numeric(data$present_site_year)))
+# Test that the 'year' column is numeric type
+test_that("'year' is numeric", {
+  expect_true(all(is.numeric(data$year)))
 })
 
 # Test that there are no missing values in the dataset
@@ -57,9 +57,9 @@ test_that("no missing values in dataset", {
   expect_true(all(!is.na(data)))
 })
 
-# Test that the 'square_footage' column is above 0
-test_that("'square_footage' column is above 0", {
-  expect_true(all(data$square_footage >= 0))
+# Test that the 'area' column is above 0
+test_that("'area' column is above 0", {
+  expect_true(all(data$area >= 0))
 })
 
 # Test that the 'facilities' column is between 0 and 7
@@ -72,7 +72,7 @@ test_that("'workstations' column is above 0", {
   expect_true(all(data$workstations >= 0))
 })
 
-# Test that the 'present_site_year' column is below 2024
-test_that("'present_site_year' column is below 2024", {
-  expect_true(all(data$present_site_year <= 2024))
+# Test that the 'year' column is below 2024
+test_that("'year' column is below 2024", {
+  expect_true(all(data$year <= 2024))
 })
