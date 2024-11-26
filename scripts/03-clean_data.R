@@ -12,6 +12,7 @@
 library(tidyverse)
 library(arrow)
 
+
 #### Clean data ####
 raw_data <- read_csv("data/01-raw_data/raw_data.csv")
 
@@ -23,6 +24,7 @@ cleaned_data <- raw_data |>
   select(branch_name, square_footage, facilities,
          workstations, present_site_year) |>
   tidyr::drop_na()
+
 
 #### Save data ####
 write_parquet(raw_data, "data/02-analysis_data/analysis_data.parquet")
