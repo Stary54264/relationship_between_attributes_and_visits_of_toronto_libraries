@@ -13,23 +13,17 @@ library(tidyverse)
 
 
 #### Simulate data ####
+set.seed(1125)
+
 # Create a dataset by randomly assigning states and parties to divisions
 simulated_data <- tibble(
-  division = paste("Division", 1:151),  # Add "Division" to make it a character
-  state = sample(
-    states,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.025, 0.025) # Rough state population distribution
-  ),
-  party = sample(
-    parties,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.40, 0.40, 0.05, 0.1, 0.05) # Rough party distribution
-  )
+  branch_name = rep("XXX", 50),
+  square_footage = round(rexp(50, 1 / 20000)),
+  facilities = rbinom(50, 7, 0.3),
+  workstations = round(rexp(50, 1 / 10)),
+  year = round(runif(50, 1900, 2024))
 )
 
 
 #### Save data ####
-write_csv(analysis_data, "data/00-simulated_data/simulated_data.csv")
+write_csv(simulated_data, "data/00-simulated_data/simulated_data.csv")
