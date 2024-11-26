@@ -20,7 +20,9 @@ cleaned_data <- raw_data |>
   janitor::clean_names() |>
   filter(physical_branch == 1) |>
   mutate(public_parking = 
-           ifelse(public_parking == "shared", 0, public_parking),
+           ifelse(public_parking == "shared", 0, as.numeric(public_parking)),
+         lat = round(lat, 3),
+         long = round(long, 3),
          year = 2024 - present_site_year) |>
   select(branch_name, square_footage, public_parking, dih,
          workstations, lat, long, year) |>
