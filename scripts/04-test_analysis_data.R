@@ -1,69 +1,78 @@
 #### Preamble ####
-# Purpose: Tests... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 26 September 2024 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Tests the cleaned data recorded by Toronto Public Library.
+# Author: Yanzun Jiang
+# Date: 25 November 2024
+# Contact: yanzun.jiang@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: Should have downloaded and cleaned the dataset.
+# Any other information needed? None.
 
 
 #### Workspace setup ####
 library(tidyverse)
 library(testthat)
-
-data <- read_csv("data/02-analysis_data/analysis_data.csv")
+library(arrow)
 
 
 #### Test data ####
-# Test that the dataset has 151 rows - there are 151 divisions in Australia
-test_that("dataset has 151 rows", {
-  expect_equal(nrow(analysis_data), 151)
+data <- read_parquet("data/02-analysis_data/analysis_data.parquet")
+
+# Test that the dataset has 100 rows
+test_that("dataset has 100 rows", {
+  expect_equal(nrow(data), 100)
 })
 
-# Test that the dataset has 3 columns
-test_that("dataset has 3 columns", {
-  expect_equal(ncol(analysis_data), 3)
+# Test that the dataset has 5 columns
+test_that("dataset has 5 columns", {
+  expect_equal(ncol(data), 5)
 })
 
-# Test that the 'division' column is character type
-test_that("'division' is character", {
-  expect_type(analysis_data$division, "character")
+# Test that the 'branch_name' column is character type
+test_that("'branch_name' is character", {
+  expect_true(all(is.character(data$branch_name)))
 })
 
-# Test that the 'party' column is character type
-test_that("'party' is character", {
-  expect_type(analysis_data$party, "character")
+# Test that the 'square_footage' column is numeric type
+test_that("'square_footage' is numeric", {
+  expect_true(all(is.numeric(data$square_footage)))
 })
 
-# Test that the 'state' column is character type
-test_that("'state' is character", {
-  expect_type(analysis_data$state, "character")
+# Test that the 'facilities' column is numeric type
+test_that("'facilities' is numeric", {
+  expect_true(all(is.numeric(data$facilities)))
+})
+
+# Test that the 'workstations' column is numeric type
+test_that("'workstations' is numeric", {
+  expect_true(all(is.numeric(data$workstations)))
+})
+
+# Test that the 'present_site_year' column is numeric type
+test_that("'present_site_year' is numeric", {
+  expect_true(all(is.numeric(data$present_site_year)))
 })
 
 # Test that there are no missing values in the dataset
 test_that("no missing values in dataset", {
-  expect_true(all(!is.na(analysis_data)))
+  expect_true(all(!is.na(data)))
 })
 
-# Test that 'division' contains unique values (no duplicates)
-test_that("'division' column contains unique values", {
-  expect_equal(length(unique(analysis_data$division)), 151)
+# Test that the 'square_footage' column is above 0
+test_that("'square_footage' column is above 0", {
+  expect_true(all(data$square_footage >= 0))
 })
 
-# Test that 'state' contains only valid Australian state or territory names
-valid_states <- c("New South Wales", "Victoria", "Queensland", "South Australia", "Western Australia", 
-                  "Tasmania", "Northern Territory", "Australian Capital Territory")
-test_that("'state' contains valid Australian state names", {
-  expect_true(all(analysis_data$state %in% valid_states))
+# Test that the 'facilities' column is between 0 and 7
+test_that("'facilities' column is between 0 and 7", {
+  expect_true(all(data$facilities >= 0) && all(data$facilities <= 7))
 })
 
-# Test that there are no empty strings in 'division', 'party', or 'state' columns
-test_that("no empty strings in 'division', 'party', or 'state' columns", {
-  expect_false(any(analysis_data$division == "" | analysis_data$party == "" | analysis_data$state == ""))
+# Test that the 'workstations' column is above 0
+test_that("'workstations' column is above 0", {
+  expect_true(all(data$workstations >= 0))
 })
 
-# Test that the 'party' column contains at least 2 unique values
-test_that("'party' column contains at least 2 unique values", {
-  expect_true(length(unique(analysis_data$party)) >= 2)
+# Test that the 'present_site_year' column is below 2024
+test_that("'present_site_year' column is below 2024", {
+  expect_true(all(data$present_site_year <= 2024))
 })
