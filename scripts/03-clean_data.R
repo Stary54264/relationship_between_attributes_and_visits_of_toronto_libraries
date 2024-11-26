@@ -23,6 +23,9 @@ cleaned_data <- raw_data |>
            teen_council + youth_hub + adult_literacy_program) |>
   select(branch_name, square_footage, facilities,
          workstations, present_site_year) |>
+  rename(name = branch_name,
+         area = square_footage,
+         year = present_site_year) |>
   tidyr::drop_na()
 
 
