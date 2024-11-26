@@ -24,7 +24,7 @@ The repo is structured as:
 
 The paper was written with the help of ChatGPT-4o, and the entire chat history is available in `other/llm_usage/usage.txt`.
 
-## Criteria
+## Criteria (Delete When Completed)
 
 - [ ] R/Python cited
 R (and/or Python) is properly referenced in the main content and in the reference list. If not, then paper gets 0 overall.
