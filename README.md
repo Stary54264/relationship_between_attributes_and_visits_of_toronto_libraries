@@ -92,10 +92,10 @@ There are at least a handful of different commits, and they have meaningful comm
 - [ ] Sketches
 Sketches are included in a labelled folder of the repo, appropriate, and of high-quality.
 
-- [ ] Simulation
+- [X] Simulation
 The script is clearly commented and structured. All variables are appropriately simulated in a sophisticated way including appropriate interaction between simulated variables.
 
-- [ ] Tests
+- [X] Tests
 High-quality extensive suites of tests are written for the both the simulated and actual datasets. These suites must be in separate scripts. The suite should be extensive and put together in a sophisticated way using packages like testthat, validate, pointblank, or great expectations.
 
 - [X] Parquet
