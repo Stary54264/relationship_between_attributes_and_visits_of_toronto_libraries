@@ -54,11 +54,11 @@ The author, date of submission in unambiguous format, and a link to a GitHub rep
 
 An abstract is included and appropriately pitched to a non-specialist audience. The abstract answers: 1) what was done, 2) what was found, and 3) why this matters (all at a high level). Likely four sentences. Abstract must make clear what we learn about the world because of this paper.
 
-- [ ] Introduction
+- [X] Introduction
 
 The introduction is self-contained and tells a reader everything they need to know including: 1) broader context to motivate; 2) some detail about what the paper is about; 3) a clear gap that needs to be filled; 4) what was done; 5) what was found; 6) why it is important; 7) the structure of the paper. A reader should be able to read only the introduction and know what was done, why, and what was found. Likely 3 or 4 paragraphs, or 10 per cent of total.
 
-- [ ] Estimand
+- [X] Estimand
 
 The estimand is clearly stated, in its own paragraph, in the introduction.
 
@@ -110,7 +110,7 @@ All data, software, literature, and any other relevant material, should be cited
 
 There are at least a handful of different commits, and they have meaningful commit messages.
 
-- [ ] Sketches
+- [X] Sketches
 
 Sketches are included in a labelled folder of the repo, appropriate, and of high-quality.
 
