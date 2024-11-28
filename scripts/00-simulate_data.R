@@ -17,7 +17,6 @@ set.seed(1125)
 
 # Create a dataset by randomly assigning states and parties to divisions
 simulated_data <- tibble(
-  name = rep("XXX", 50),
   area = round(rexp(50, 0.00005)),
   parking = round(rexp(50, 0.1)),
   dih = sample(c(0, 1), 50, replace = TRUE, p = c(0.7, 0.3)),

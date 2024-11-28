@@ -19,12 +19,11 @@ raw_data <- read_csv("data/01-raw_data/raw_data.csv")
 cleaned_data <- raw_data |>
   janitor::clean_names() |>
   filter(physical_branch == 1) |>
-  rename(name = branch_name,
-         area = square_footage,
+  rename(area = square_footage,
          parking = public_parking) |>
   mutate(parking = ifelse(parking == "shared", 0, as.numeric(parking)),
          year = 2024 - present_site_year) |>
-  select(name, area, parking, dih, workstations, year) |>
+  select(area, parking, dih, workstations, year) |>
   tidyr::drop_na()
 
 

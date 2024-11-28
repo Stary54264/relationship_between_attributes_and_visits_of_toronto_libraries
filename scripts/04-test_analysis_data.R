@@ -22,14 +22,9 @@ test_that("dataset has 100 rows", {
   expect_equal(nrow(data), 100)
 })
 
-# Test that the dataset has 6 columns
-test_that("dataset has 6 columns", {
-  expect_equal(ncol(data), 6)
-})
-
-# Test that the 'name' column is character type
-test_that("'name' is character", {
-  expect_true(all(is.character(data$name)))
+# Test that the dataset has 5 columns
+test_that("dataset has 5 columns", {
+  expect_equal(ncol(data), 5)
 })
 
 # Test that the 'area' column is numeric type
