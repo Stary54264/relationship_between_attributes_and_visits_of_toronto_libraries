@@ -110,7 +110,7 @@ All data, software, literature, and any other relevant material, should be cited
 
 There are at least a handful of different commits, and they have meaningful commit messages.
 
-- [X] Sketches
+- [ ] Sketches
 
 Sketches are included in a labelled folder of the repo, appropriate, and of high-quality.
 
