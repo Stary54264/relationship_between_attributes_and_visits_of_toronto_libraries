@@ -1,6 +1,6 @@
 ---
-title: "Understanding the Relationship between Attributes and Whether DIH Exists"
-subtitle: "A Data Analysis of Facilities of Toronto Libraries"
+title: "Understanding Factors That Affects the Existence of Digital Innovation Hubs"
+subtitle: "An Analysis of Toronto Libraries' Data"
 author: "Yanzun Jiang"
 thanks: "Code and data are available at: [https://github.com/Stary54264/relationship_between_attributes_and_whether_dih_exists_in_toronto_libraries](https://github.com/Stary54264/relationship_between_attributes_and_whether_dih_exists_in_toronto_libraries)."
 date: today
@@ -18,49 +18,64 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
+library(arrow)
 library(rstanarm)
 library(here)
-library(knitr)
+library(tinytable)
 ```
 
 \newpage
 
 # Introduction
 
-Despite the growing importance of innovation hubs in the global economy, the factors influencing the presence of Designated Innovation Hubs (DIH) in facilities remain underexplored and needed to be filled. This paper seeks to identify the key factors that influence whether a library in Toronto has a DIH, focusing on attributes such as area size, the number of public parking spots, the number of workstations in the library, and the year the library was built.
+Despite the growing importance of innovation hubs in the global economy, the factors influencing the presence of Digital Innovation Hubs (DIH) in facilities remain underexplored and needed to be filled. This paper seeks to identify the key factors that influence whether a library in Toronto has a DIH, focusing on attributes such as area size, the number of public parking spots, the number of workstations in the library, and the number of years from the library was built.
 
-To investigate these factors, a logistic regression model was utilized, which is ideal for predicting binary outcomes (the presence or absence of a DIH). This analysis aims to estimate the likelihood of a facility having a DIH based on these attributes. The dataset used in this study contains information on various libraries in Toronto. After data cleaning, relevant variables was selected to do data analysis. The logistic regression model will reveal how each attribute (area size, parking availability, number of workstations, and age of the building) impacts the presence of a DIH.
-
-The estimand in this paper is the presence of a Designated Innovation Hub (DIH) in a library. However, accurately observing which libraries have a DIH is not straightforward due to several challenges faced by urban planners. They may not have access to complete or up-to-date information about all libraries. This lack of comprehensive data, combined with regional variations and different reporting standards, makes it difficult to directly know the presence of a DIH across all libraries. To address this issue, a logistic regression model was built, since it allows us to estimate the probability of a facility having a DIH based on key attributes available in the dataset. By doing so, we aim to provide urban planners with insights into which factors most strongly influence the presence of DIHs, despite the challenges in directly measuring this estimand.
+To investigate these factors, a logistic regression model was utilized, which is ideal for predicting binary outcomes (the presence or absence of a DIH). This analysis aims to estimate the likelihood of a library having a DIH based on these attributes. The dataset used in this study contains information on various libraries in Toronto. After data cleaning, relevant variables was selected to do data analysis. The logistic regression model will reveal how each attribute (area size, parking availability, number of workstations, and age of the building) impacts the presence of a DIH.
 
 Results
 
 DIHs are vital in fostering entrepreneurship, driving economic development, and supporting technological advancements. Understanding the attributes that contribute to the likelihood of a library of having a DIH could provide valuable insights for urban planners and policymakers.
 
-The remainder of this paper is structured as follows: @sec-data discusses the data used in this analysis, including an overview of the dataset and key descriptive statistics. @sec-model outlines the logistic regression model, its assumptions, and its interpretation. @sec-results presents the results of the model, including the significance of each attribute in predicting the presence of a DIH. @sec-discussion offers a discussion of the findings, examines how these attributes affect DIH presence, and lists some weakness of this analysis. Statistical analysis is performed using `R` [@r], with packages `tidyverse` [@tidyverse], `arrow` [@arrow], `janitor` [@janitor], `testthat` [@testthat], `rstanarm` [@rstanarm], `here` [@here], and `knitr` [@knitr].
+The remainder of this paper is structured as follows: @sec-data discusses the data used in this analysis, including an overview of the dataset and key descriptive statistics. @sec-model outlines the logistic regression model, its assumptions, and its interpretation. @sec-results presents the results of the model, including the significance of each attribute in predicting the presence of a DIH. @sec-discussion offers a discussion of the findings, examines how these attributes affect DIH presence, and lists some weakness of this analysis. Statistical analysis is performed using `R` [@r], with packages `tidyverse` [@tidyverse], `arrow` [@arrow], `janitor` [@janitor], `testthat` [@testthat], `rstanarm` [@rstanarm], `here` [@here], and `tinytable` [@tinytable].
+
+## Estimand
+
+The estimand in this paper is the presence of a Digital Innovation Hub (DIH) in a library. However, accurately observing which libraries have a DIH is not straightforward due to several challenges faced by urban planners. They may not have access to complete or up-to-date information about all libraries. This lack of comprehensive data, combined with regional variations and different reporting standards, makes it difficult to directly know the presence of a DIH across all libraries. To address this issue, a logistic regression model was built, since it allows us to estimate the probability of a facility having a DIH based on key attributes available in the dataset. By doing so, we aim to provide urban planners with insights into which factors most strongly influence the presence of DIHs, despite the challenges in directly measuring this estimand.
 
 # Data {#sec-data}
 
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+data <- read_parquet(
+  here::here("data/02-analysis_data/analysis_data.parquet"))
+```
+
 ## Overview
-
-Our data [@library].... Following @rohan, we consider...
-
-Overview text
+ 
+This report uses a dataset collected by Toronto Public Library [@library] and posted on Open Data Toronto [@data]. [@tbl-data] is a preview of the dataset. These data provide valuable insights into the physical attributes and temporal characteristics of libraries that may house DIHs. Alternative datasets, such as those focusing on municipal buildings or educational institutions, were considered but ultimately not used because libraries are more accessible to public, thus having a bigger impact on the society. The dataset includes predictor variables including library area, public parking spots, the number of workstations, and the year the library was built. Data on these variables would be used to predict the outcome variable - the presence of DIHs.
 
 ## Measurement
 	
 Some paragraphs about how we go from a phenomena in the world to an entry in the dataset.
 
-## Outcome variables
+## Variables
 
-Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular.
+One outcome variable and four predictor variables are used in the model:
 
-## Predictor variables
+`dih`: The presence of DIHs in libraries in Toronto. If there is one or more DIHs in the library, this field is set to 1; otherwise, this field is set to 0.
 
-Add graphs, tables and text.
+`area`: The total size of the library measured in square feet.
 
-Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally.
+`parking`: The number of parking spaces available for the public. If a branch does not have any public parking spaces or shares parking spaces with another location, this field is set to 0.
 
+`workstations`: A count of computers with internet access available for public use in the branch.
+
+`year`: The number of years from the year that the present location of the library was officially opened to the general public. This variable was constructed using the formula $year=2024-year~built$. The age of the library was used instead of the year that the library was built since the age shows the degree of newness, which might affect the presence of DIHs. However, the year built is not that direct.
+
+Theeir descriptive statistics and graphs of their distribution is included in appendix (@sec-graph).
 
 # Model {#sec-model}
 
@@ -127,16 +142,139 @@ Weaknesses and next steps should also be included.
 
 # Appendix {-}
 
+# Descriptive Statistics and Graphs of the Dataset {#sec-graph}
 
-# Additional data details
+## Preview of the Dataset
 
-# Model details {#sec-model-details}
+```{r}
+#| label: tbl-data
+#| tbl-cap: "Preview of the Toronto Libraries Dataset"
+#| message: false
+#| echo: false
 
-## Posterior predictive check
+preview <- tt(head(data))
+preview
+```
 
+## Descriptive Statistics
 
-## Diagnostics
+```{r}
+#| label: tbl-area
+#| tbl-cap: "Descriptive Statistics of `area`"
+#| message: false
+#| echo: false
 
+area <- tt(data |> summarize(Mean = round(mean(area), 1),
+                     Median = median(area),
+                     Minimum = min(area),
+                     Maximum = max(area),
+                     IQR = round(IQR(area), 1)))
+area
+```
+
+```{r}
+#| label: tbl-parking
+#| tbl-cap: "Descriptive Statistics of `parking`"
+#| message: false
+#| echo: false
+
+parking <- tt(data |> summarize(Mean = round(mean(parking), 1),
+                     Median = median(parking),
+                     Minimum = min(parking),
+                     Maximum = max(parking),
+                     IQR = round(IQR(parking), 1)))
+parking
+```
+
+```{r}
+#| label: tbl-workstations
+#| tbl-cap: "Descriptive Statistics of `workstations`"
+#| message: false
+#| echo: false
+
+workstations <- tt(data |> summarize(Mean = round(mean(workstations), 1),
+                     Median = median(workstations),
+                     Minimum = min(workstations),
+                     Maximum = max(workstations),
+                     IQR = round(IQR(workstations), 1)))
+workstations
+```
+
+```{r}
+#| label: tbl-year
+#| tbl-cap: "Descriptive Statistics of `year`"
+#| message: false
+#| echo: false
+
+year <- tt(data |> summarize(Mean = round(mean(year), 1),
+                     Median = median(year),
+                     Minimum = min(year),
+                     Maximum = max(year),
+                     IQR = round(IQR(year), 1)))
+year
+```
+
+## Graphs
+
+```{r}
+#| label: fig-dih
+#| tbl-cap: "Presence of DIHs in Toronto Libraries"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = dih)) +
+  geom_bar(col = "lightblue", fill = "lightblue", alpha = 0.8) +
+  labs(x = "Presence of DIHs", y = "# of Libraries") +
+  theme_minimal()
+```
+
+```{r}
+#| label: fig-area
+#| tbl-cap: "Distribution of Total Areas of Libraries in Toronto"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = area)) +
+  geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
+  labs(x = "Total Area", y = "# of Libraries") +
+  theme_minimal()
+```
+
+```{r}
+#| label: fig-parking
+#| tbl-cap: "Distribution of Number of Parking Spaces at Libraries in Toronto"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = parking)) +
+  geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
+  labs(x = "# of Parking Spaces", y = "# of Libraries") +
+  theme_minimal()
+```
+
+```{r}
+#| label: fig-workstations
+#| tbl-cap: "Distribution of Number of Workstations in Libraries in Toronto"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = workstations)) +
+  geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
+  labs(x = "# of Workstations", y = "# of Libraries") +
+  theme_minimal()
+```
+
+```{r}
+#| label: fig-year
+#| tbl-cap: "Distribution of Age of Libraries in Toronto"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = year)) +
+  geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
+  labs(x = "# of Workstations", y = "# of Libraries") +
+  theme_minimal()
+```
 
 \newpage
 
