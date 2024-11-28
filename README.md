@@ -26,19 +26,19 @@ The paper was written with the help of ChatGPT-4o, and the entire chat history i
 
 ## Criteria (Delete When Completed)
 
-- [ ] R/Python cited
+- [X] R/Python cited
 
 R (and/or Python) is properly referenced in the main content and in the reference list. If not, then paper gets 0 overall.
 
-- [ ] Data cited
+- [X] Data cited
 
 Data are properly referenced in the main content and in the reference list. If not, then paper gets 0 overall.
 
-- [ ] Class paper
+- [X] Class paper
 
 There is no sign this is a class project. Check the rproj and folder names, the README, the title, code comments, etc. If there is any sign this is a class paper, then paper gets 0 overall.
 
-- [ ] LLM documentation
+- [X] LLM documentation
 
 A separate paragraph or dot point must be included in the README about whether LLMs were used, and if so how. If auto-complete tools such as co-pilot were used this must be mentioned. If chat tools such as ChatGPT, were used then the entire chat must be included in the usage text file. If not, then paper gets 0 overall.
 
