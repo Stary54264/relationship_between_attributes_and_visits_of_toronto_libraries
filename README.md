@@ -70,7 +70,7 @@ A sense of the dataset should be communicated to the reader. The broader context
 
 A thorough discussion of measurement, relating to the dataset, is provided in the data section. Please ensure that you explain how we went from some phenomena in the world that happened to an entry in the dataset that you are interested in.
 
-- [ ] Model
+- [X] Model
 
 Present the model clearly using appropriate mathematical notation and plain English explanations, defining every component. Ensure the model is well-explained, justified, appropriate, and balanced in complexity—neither overly simplistic nor unnecessarily complicated—for the situation. Variables should be well-defined and correspond with those in the data section. Explain how modeling decisions reflect aspects discussed in the data section, including why specific features are included (e.g., using age rather than age groups, treating province effects as levels, categorizing gender). If applicable, define and justify sensible priors for Bayesian models. Clearly discuss underlying assumptions, potential limitations, and situations where the model may not be appropriate. Mention the software used to implement the model, and provide evidence of model validation and checking—such as out-of-sample testing, RMSE calculations, test/training splits, or sensitivity analyses—addressing model convergence and diagnostics (although much of the detail make be in the appendix). Include any alternative models or variants considered, their strengths and weaknesses, and the rationale for the final model choice.
 
