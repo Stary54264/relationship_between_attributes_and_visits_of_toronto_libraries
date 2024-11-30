@@ -28,7 +28,7 @@ library(tinytable)
 
 # Introduction
 
-Despite the growing importance of innovation hubs in the global economy, the factors influencing the presence of Digital Innovation Hubs (DIH) in facilities remain underexplored and needed to be filled. This paper seeks to identify the key factors that influence whether a library in Toronto has a DIH, focusing on attributes such as area size, the number of public parking spots, the number of workstations in the library, and the number of years from the library was built.
+Despite the growing importance of innovation hubs in the global economy, the factors influencing the presence of Digital Innovation Hubs (DIH) in facilities remain under-explored and needed to be filled. This paper seeks to identify the key factors that influence whether a library in Toronto has a DIH, focusing on attributes such as area size, the number of public parking spots, the number of workstations in the library, and the number of years from the library was built.
 
 To investigate these factors, a logistic regression model was utilized, which is ideal for predicting binary outcomes (the presence or absence of a DIH). This analysis aims to estimate the likelihood of a library having a DIH based on these attributes. The dataset used in this study contains information on various libraries in Toronto. After data cleaning, relevant variables was selected to do data analysis. The logistic regression model will reveal how each attribute (area size, parking availability, number of workstations, and age of the building) impacts the presence of a DIH.
 
@@ -52,14 +52,8 @@ The estimand in this paper is the presence of a Digital Innovation Hub (DIH) in 
 data <- read_parquet(
   here::here("data/02-analysis_data/analysis_data.parquet"))
 ```
-
-## Overview
  
 This report uses a dataset collected by Toronto Public Library [@library] and posted on Open Data Toronto [@data]. [@tbl-data] is a preview of the dataset. These data provide valuable insights into the physical attributes and temporal characteristics of libraries that may house DIHs. Alternative datasets, such as those focusing on municipal buildings or educational institutions, were considered but ultimately not used because libraries are more accessible to public, thus having a bigger impact on the society. The dataset includes predictor variables including library area, public parking spots, the number of workstations, and the year the library was built. Data on these variables would be used to predict the outcome variable - the presence of DIHs.
-
-## Measurement
-	
-Some paragraphs about how we go from a phenomena in the world to an entry in the dataset.
 
 ## Variables
 
@@ -75,50 +69,81 @@ One outcome variable and four predictor variables are used in the model:
 
 `year`: The number of years from the year that the present location of the library was officially opened to the general public. This variable was constructed using the formula $year=2024-year~built$. The age of the library was used instead of the year that the library was built since the age shows the degree of newness, which might affect the presence of DIHs. However, the year built is not that direct.
 
-Theeir descriptive statistics and graphs of their distribution is included in appendix (@sec-graph).
+Their descriptive statistics and graphs of their distribution is included in @sec-dsg.
+
+## Measurement
+	
+The library dataset used in this study was collected through a combination of administrative records and self-reported surveys. While the dataset provides valuable insights, several factors need to be considered:
+
+Reporting Variability: Libraries differ in how they track and report operational data, leading to potential inconsistencies. For instance, “workstations” might only include computers in some libraries, while others might also count other types of technological infrastructure.
+
+Survey Limitations: The presence of a DIH was self-reported, which could result in over- or under-representation of actual DIHs. Some respondents might interpret “Digital Innovation Hub” differently based on their regional or institutional context.
+
+Geographical Coverage: The dataset might not represent all regions equally. Libraries in rural areas may be underrepresented, impacting the generalization of the findings.
+
+### Connection with Real-World
+
+The dataset connects real-world phenomena to measurable entries. For example:
+
+`area`: The size of a library, measured in square feet, reflects its physical capacity to host community activities, including DIHs. Size of library would affect the presence of DIHs.
+
+`parking`: The number of parking spaces captures the the likelihood of a library being visited. If a library is more likely to be visited, it would have more facilities.
+
+`workstations`: Number of workstations symbolize a library's technological infrastructure - computers and other digital tools that enable public access to the internet, software, and other resources. Libraries with more computers is likely to have DIHs.
+
+`year`: Newer libraries are often designed to meet current technological needs, making them more suitable for DIHs.
+
+`dih`: The presence of a DIH at a library provides a learning opportunity for the public.
 
 # Model {#sec-model}
 
-The goal of our modelling strategy is twofold. Firstly,...
+```{r}
+#| include: false
+#| warning: false
+#| message: false
 
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
+model <- readRDS(here::here("models/model.rds"))
+```
+
+In this analysis, a Bayesian logistic regression model was used to examine the relationship between the presence of a DIH in libraries and key library attributes. More details are included in @sec-md.
+
+Our assumptions include that samples could represent every library in Toronto, observations should be independent with each other, and no perfect multicollinearity between predictor variables.
+
+There are some limitations of our model. The model would be no longer valid if the actual underlying relationship between the predictor variables and the outcome variable is non-linear. Also, the predictor variables might not represent every aspect that would affect the presence of DIHs.
+
+Additional predictor variables include position of the library (longitude and latitude). However, while the position of the library could affect the presence of DIHs indeed, the longitude and latitude are not associated with it linearly.
 
 ## Model set-up
 
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
+Define $y_i$ as whether a library has a DIH (0 for no and 1 for yes) with probability $p_i$, so it follows a Bernoulli distribution. Then, the logistic link function of $p_i$ is a linear combination of the intercept - $\beta_0$, and the effects of the predictor variables - $\beta_1$, $\beta_2$, $\beta_3$, and $\beta_4$ times the predictor variables respectively.
 
 \begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
+y_i|p_i &\sim \mbox{Bern}(p_i) \\
+\mbox{logit}(p_i) &= \beta_0 + \beta_1 \times \mbox{area}_i + \beta_2 \times \mbox{parking}_i + \beta_3 \times \mbox{workstations}_i + \beta_4 \times \mbox{year}_i \\
+\beta_0 &\sim \mbox{Normal}(0, 2.5) \\
+\beta_1 &\sim \mbox{Normal}(0, 2.5) \\
+\beta_2 &\sim \mbox{Normal}(0, 2.5) \\
+\beta_3 &\sim \mbox{Normal}(0, 2.5) \\
+\beta_4 &\sim \mbox{Normal}(0, 2.5)
 \end{align}
 
-We run the model in R using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
+Since we have no prior information about any variable, the prior of the intercept and coefficients was set to a normal distribution with $\mu=0$ and $\sigma=2.5$. We run the model in R [@r] using the `rstanarm` package [@rstanarm].
 
+## Model justification
 
-### Model justification
+We propose the following hypotheses regarding how library attributes influence the likelihood of having DIHs.
 
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
+`area`: We anticipate that larger libraries are more likely to host DIHs. Greater area reflects increased physical capacity, enabling libraries to allocate dedicated spaces for innovation and technology.
 
-We can use maths by including latex between dollar signs, for instance $\theta$.
+`parking`: The number of parking spaces is expected to positively correlate with the presence of a DIH. Parking facilities make libraries more accessible to the public, encouraging diverse patronage and increasing community engagement. Libraries with better accessibility might be more willing to improve its facilities and might receive greater funding and community support, promoting the establishment of advanced facilities like DIHs.
 
+`workstations`: A strong positive relationship between the number of workstations and the presence of a DIH is expected. Workstations, representing technological infrastructure, are often central to the function of a DIH. Libraries with more workstations are likely equipped with the resources needed to support digital innovation and technological engagement.
+
+`year`: We hypothesize a negative relationship between years since built and the likelihood of having a DIH. Older libraries might lack modern infrastructure and technological resources necessary for a DIH, whereas recently built or renovated libraries are more likely to own technological innovations aligned with the concept of a DIH.
 
 # Results {#sec-results}
 
 Our results are summarized in @tbl-modelresults.
-
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
-#| message: false
-
-first_model <- readRDS(file = here::here("models/model.rds"))
-```
-
 
 # Discussion {#sec-discussion}
 
@@ -142,7 +167,7 @@ Weaknesses and next steps should also be included.
 
 # Appendix {-}
 
-# Descriptive Statistics and Graphs of the Dataset {#sec-graph}
+# Descriptive Statistics and Graphs of the Dataset {#sec-dsg}
 
 ## Preview of the Dataset
 
@@ -272,9 +297,33 @@ data |> ggplot(aes(x = workstations)) +
 
 data |> ggplot(aes(x = year)) +
   geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
-  labs(x = "# of Workstations", y = "# of Libraries") +
+  labs(x = "Age", y = "# of Libraries") +
   theme_minimal()
 ```
+
+# Model Details {#sec-md}
+
+```{r}
+#| label: fig-posterior
+#| fig-cap: Posterior Distribution for the Logistic Regression Model 
+#| echo: false
+#| warning: false
+#| message: false
+
+pp_check(model) +
+  theme_minimal()
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+pred <- fitted(model)
+RMSE <- round(sqrt(mean((data$dih - pred) ^ 2)), 3)
+```
+
+The distribution of posterior is shown in @fig-posterior, which aligns with the actual data. From the graph, we can see that more libraries does not have a DIH. The $RMSE$ for our model is about `r RMSE`, which is a quite small value, meaning the model fits the data quite well.
 
 \newpage
 
