@@ -3,7 +3,6 @@
 # Author: Yanzun Jiang
 # Date: 25 November 2024
 # Contact: yanzun.jiang@mail.utoronto.ca
-# License: MIT
 # Pre-requisites: Should have downloaded and cleaned the dataset.
 # Any other information needed? None.
 
