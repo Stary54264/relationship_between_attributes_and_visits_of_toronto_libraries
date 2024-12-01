@@ -5,7 +5,7 @@ author: "Yanzun Jiang"
 thanks: "Code and data are available at: [https://github.com/Stary54264/relationship_between_attributes_and_whether_dih_exists_in_toronto_libraries](https://github.com/Stary54264/relationship_between_attributes_and_whether_dih_exists_in_toronto_libraries)."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This study examines the factors influencing the presence of Digital Innovation Hubs (DIHs) in libraries, focusing on key attributes such as area, parking availability, workstations, and the age of the library. A logistic regression model is employed to analyze the relationship between these variables and the likelihood of a library hosting a DIH. The results indicate that higher parking and more workstations increase the likelihood of a library having a DIH, while older libraries are less likely to feature one. These findings can inform decisions on library resource allocation and the development of DIHs, particularly when planning for library renovations or new library constructions."
 format: pdf
 toc: true
 number-sections: true
@@ -31,13 +31,11 @@ library(performance)
 
 # Introduction
 
-Despite the growing importance of innovation hubs in the global economy, the factors influencing the presence of Digital Innovation Hubs (DIH) in facilities remain under-explored and needed to be filled. This paper seeks to identify the key factors that influence whether a library in Toronto has a DIH, focusing on attributes such as area size, the number of public parking spots, the number of workstations in the library, and the number of years from the library was built.
+Despite the growing importance of innovation hubs in the global economy, the factors influencing the presence of Digital Innovation Hubs (DIH) in facilities remain under-explored and needed to be filled. DIHs are vital in fostering entrepreneurship, driving economic development, and supporting technological advancements. Understanding the attributes that contribute to the likelihood of a library of having a DIH could provide valuable insights for urban planners and policymakers. This paper seeks to identify the key factors that influence whether a library in Toronto has a DIH, focusing on attributes such as area size, the number of public parking spots, the number of workstations in the library, and the number of years from the library was built.
 
 To investigate these factors, a logistic regression model was utilized, which is ideal for predicting binary outcomes (the presence or absence of a DIH). This analysis aims to estimate the likelihood of a library having a DIH based on these attributes. The dataset used in this study contains information on various libraries in Toronto. After data cleaning, relevant variables was selected to do data analysis. The logistic regression model will reveal how each attribute (area size, parking availability, number of workstations, and age of the building) impacts the presence of a DIH.
 
-Results
-
-DIHs are vital in fostering entrepreneurship, driving economic development, and supporting technological advancements. Understanding the attributes that contribute to the likelihood of a library of having a DIH could provide valuable insights for urban planners and policymakers.
+In our analysis, the logistic regression model reveals that libraries with higher parking and more workstations are more likely to have DIHs, while the area of the library has little effect on this outcome. Additionally, older libraries are less likely to feature a DIH, aligning with our expectations. The model's $R^2$ value suggests it does not fit the data very well, though the relatively low $RMSE$ indicates that overfitting is not a concern. These results provide valuable insights into the factors that influence the presence of DIHs in libraries.
 
 The remainder of this paper is structured as follows: @sec-data discusses the data used in this analysis, including an overview of the dataset and key descriptive statistics. @sec-model outlines the logistic regression model, its assumptions, and its interpretation. @sec-results presents the results of the model, including the significance of each attribute in predicting the presence of a DIH. @sec-discussion offers a discussion of the findings, examines how these attributes affect DIH presence, and lists some weakness of this analysis. @sec-appendix provides extra tables and graphs to further explain the findings in this paper.
 
