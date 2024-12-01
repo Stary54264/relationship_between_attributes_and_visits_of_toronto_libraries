@@ -338,7 +338,7 @@ From @fig-area-dih, we could see that smaller libraries are likely to have no DI
 
 ```{r, fig.pos="H"}
 #| label: fig-area-dih
-#| tbl-cap: "Density of `area` Categorized by Presence of DIHs"
+#| fig-cap: "Density of `area` Categorized by Presence of DIHs"
 #| message: false
 #| echo: false
 
@@ -351,7 +351,7 @@ data |> ggplot(aes(x = area, fill = as.factor(dih))) +
 
 ```{r, fig.pos="H"}
 #| label: fig-parking-dih
-#| tbl-cap: "Density of `parking` Categorized by Presence of DIHs"
+#| fig-cap: "Density of `parking` Categorized by Presence of DIHs"
 #| message: false
 #| echo: false
 
@@ -364,7 +364,7 @@ data |> ggplot(aes(x = parking, fill = as.factor(dih))) +
 
 ```{r, fig.pos="H"}
 #| label: fig-workstations-dih
-#| tbl-cap: "Density of `workstations` Categorized by Presence of DIHs"
+#| fig-cap: "Density of `workstations` Categorized by Presence of DIHs"
 #| message: false
 #| echo: false
 
@@ -377,7 +377,7 @@ data |> ggplot(aes(x = workstations, fill = as.factor(dih))) +
 
 ```{r, fig.pos="H"}
 #| label: fig-year-dih
-#| tbl-cap: "Density of `year` Categorized by Presence of DIHs"
+#| fig-cap: "Density of `year` Categorized by Presence of DIHs"
 #| message: false
 #| echo: false
 
