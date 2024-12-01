@@ -50,7 +50,7 @@ An informative title is included that explains the story, and ideally tells the 
 
 The author, date of submission in unambiguous format, and a link to a GitHub repo are clearly included. (The later likely, but not necessarily, through a statement such as: 'Code and data supporting this analysis is available at: LINK').
 
-- [ ] Abstract
+- [X] Abstract
 
 An abstract is included and appropriately pitched to a non-specialist audience. The abstract answers: 1) what was done, 2) what was found, and 3) why this matters (all at a high level). Likely four sentences. Abstract must make clear what we learn about the world because of this paper.
 
@@ -126,7 +126,7 @@ High-quality extensive suites of tests are written for the both the simulated an
 
 The analysis dataset is saved as a parquet file. (The raw data should be saved in whatever format it came.)
 
-- [ ] Reproducible workflow
+- [X] Reproducible workflow
 
 Use an organized repo with a detailed README and an R project. Thoroughly document code and include a preamble, comments, nice structure, and style code with styler or lintr. Use seeds appropriately. Avoid leaving install.packages() in the code unless handled sophisticatedly. Exclude unnecessary files from the repo; avoid hard-coded paths and setwd(). Use base pipe not magrittr pipe. Comment on and close all GitHub issues. Deal with all branches.
 
