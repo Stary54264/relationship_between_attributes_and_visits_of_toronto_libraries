@@ -21,7 +21,10 @@ library(tidyverse)
 library(arrow)
 library(rstanarm)
 library(here)
-library(tinytable)
+library(knitr)
+library(kableExtra)
+library(modelsummary)
+library(performance)
 ```
 
 \newpage
@@ -36,7 +39,9 @@ Results
 
 DIHs are vital in fostering entrepreneurship, driving economic development, and supporting technological advancements. Understanding the attributes that contribute to the likelihood of a library of having a DIH could provide valuable insights for urban planners and policymakers.
 
-The remainder of this paper is structured as follows: @sec-data discusses the data used in this analysis, including an overview of the dataset and key descriptive statistics. @sec-model outlines the logistic regression model, its assumptions, and its interpretation. @sec-results presents the results of the model, including the significance of each attribute in predicting the presence of a DIH. @sec-discussion offers a discussion of the findings, examines how these attributes affect DIH presence, and lists some weakness of this analysis. Statistical analysis is performed using `R` [@r], with packages `tidyverse` [@tidyverse], `arrow` [@arrow], `janitor` [@janitor], `testthat` [@testthat], `rstanarm` [@rstanarm], `here` [@here], and `tinytable` [@tinytable].
+The remainder of this paper is structured as follows: @sec-data discusses the data used in this analysis, including an overview of the dataset and key descriptive statistics. @sec-model outlines the logistic regression model, its assumptions, and its interpretation. @sec-results presents the results of the model, including the significance of each attribute in predicting the presence of a DIH. @sec-discussion offers a discussion of the findings, examines how these attributes affect DIH presence, and lists some weakness of this analysis. @sec-appendix provides extra tables and graphs to further explain the findings in this paper.
+
+Statistical analysis is performed using `R` [@r], with packages `tidyverse` [@tidyverse], `arrow` [@arrow], `janitor` [@janitor], `testthat` [@testthat], `here` [@here], `modelsummary` [@modelsummary], `performance` [@performance], `knitr` [@knitr], `kableExtra` [@kableExtra], and `rstanarm` [@rstanarm].
 
 ## Estimand
 
@@ -105,11 +110,11 @@ The dataset connects real-world phenomena to measurable entries. For example:
 model <- readRDS(here::here("models/model.rds"))
 ```
 
-In this analysis, a Bayesian logistic regression model was used to examine the relationship between the presence of a DIH in libraries and key library attributes. More details are included in @sec-md.
+In this analysis, a Bayesian logistic regression model was used to examine the relationship between the presence of a DIH in libraries and key library attributes.
 
 Our assumptions include that samples could represent every library in Toronto, observations should be independent with each other, and no perfect multicollinearity between predictor variables.
 
-There are some limitations of our model. The model would be no longer valid if the actual underlying relationship between the predictor variables and the outcome variable is non-linear. Also, the predictor variables might not represent every aspect that would affect the presence of DIHs.
+There are some limitations of our model. The model would be no longer valid if the actual underlying relationship between the predictor variables and the outcome variable is non-linear. Also, the predictor variables might not follow normal distribution.
 
 Additional predictor variables include position of the library (longitude and latitude). However, while the position of the library could affect the presence of DIHs indeed, the longitude and latitude are not associated with it linearly.
 
@@ -143,7 +148,21 @@ We propose the following hypotheses regarding how library attributes influence t
 
 # Results {#sec-results}
 
-Our results are summarized in @tbl-modelresults.
+Our model results are summarized in @tbl-model. The findings align with our prior expectations in some degree and provide insights into the relationship between the predictor variables and the presence of DIHs. The intercept is negative, showing that more libraries do not have a DIH. The coefficient of `area` is 0, meaning the area of the library has litte effect on the outcome variable. The slope of `parking` and `workstations` are all positive, meaning a increase in them would lead to a higher likelihood of having DIHs. Rather, `year` has a negative slope, meaning older libraries are less likely to have a DIH, which aligns with our assumption.
+
+The $R^2$ for this model is quite small, meaning the model might not fit the data well. However, the $RMSE$ is also quite small, meaning the problem of overfit would not present in our model. More details are included in @sec-md.
+
+\clearpage
+
+```{r, fig.pos="H"}
+#| label: tbl-model
+#| tbl-cap: "Summary Statistics of the Logistic Regression Model"
+#| message: false
+#| warning: false
+#| echo: false
+
+modelsummary(model, output = "kableExtra")
+```
 
 # Discussion {#sec-discussion}
 
@@ -165,85 +184,82 @@ Weaknesses and next steps should also be included.
 
 \appendix
 
-# Appendix {-}
+# Appendix {-#sec-appendix}
 
 # Descriptive Statistics and Graphs of the Dataset {#sec-dsg}
 
 ## Preview of the Dataset
 
-```{r}
+```{r, fig.pos="H"}
 #| label: tbl-data
 #| tbl-cap: "Preview of the Toronto Libraries Dataset"
 #| message: false
 #| echo: false
 
-preview <- tt(head(data))
-preview
+kable(head(data))
 ```
 
 ## Descriptive Statistics
 
-```{r}
+```{r, fig.pos="H"}
 #| label: tbl-area
 #| tbl-cap: "Descriptive Statistics of `area`"
 #| message: false
 #| echo: false
 
-area <- tt(data |> summarize(Mean = round(mean(area), 1),
-                     Median = median(area),
-                     Minimum = min(area),
-                     Maximum = max(area),
-                     IQR = round(IQR(area), 1)))
-area
+kable(data |> summarize(Mean = round(mean(area), 1),
+                        Median = median(area),
+                        Minimum = min(area),
+                        Maximum = max(area),
+                        IQR = round(IQR(area), 1)))
 ```
 
-```{r}
+```{r, fig.pos="H"}
 #| label: tbl-parking
 #| tbl-cap: "Descriptive Statistics of `parking`"
 #| message: false
 #| echo: false
 
-parking <- tt(data |> summarize(Mean = round(mean(parking), 1),
-                     Median = median(parking),
-                     Minimum = min(parking),
-                     Maximum = max(parking),
-                     IQR = round(IQR(parking), 1)))
-parking
+kable(data |> summarize(Mean = round(mean(parking), 1),
+                        Median = median(parking),
+                        Minimum = min(parking),
+                        Maximum = max(parking),
+                        IQR = round(IQR(parking), 1)))
 ```
 
-```{r}
+```{r, fig.pos="H"}
 #| label: tbl-workstations
 #| tbl-cap: "Descriptive Statistics of `workstations`"
 #| message: false
 #| echo: false
 
-workstations <- tt(data |> summarize(Mean = round(mean(workstations), 1),
-                     Median = median(workstations),
-                     Minimum = min(workstations),
-                     Maximum = max(workstations),
-                     IQR = round(IQR(workstations), 1)))
-workstations
+kable(data |> summarize(Mean = round(mean(workstations), 1),
+                        Median = median(workstations),
+                        Minimum = min(workstations),
+                        Maximum = max(workstations),
+                        IQR = round(IQR(workstations), 1)))
 ```
 
-```{r}
+```{r, fig.pos="H"}
 #| label: tbl-year
 #| tbl-cap: "Descriptive Statistics of `year`"
 #| message: false
 #| echo: false
 
-year <- tt(data |> summarize(Mean = round(mean(year), 1),
-                     Median = median(year),
-                     Minimum = min(year),
-                     Maximum = max(year),
-                     IQR = round(IQR(year), 1)))
-year
+kable(data |> summarize(Mean = round(mean(year), 1),
+                        Median = median(year),
+                        Minimum = min(year),
+                        Maximum = max(year),
+                        IQR = round(IQR(year), 1)))
 ```
 
 ## Graphs
 
-```{r}
+From @fig-dih, we could see that more libraries do not have a DIH. All predictor variables are right-skewed (@fig-area, @fig-parking, and @fig-workstations), except `year` (@fig-year). `year` might follows a normal distribution, while other predictor variables might follows an exponential distribution.
+
+```{r, fig.pos="H"}
 #| label: fig-dih
-#| tbl-cap: "Presence of DIHs in Toronto Libraries"
+#| fig-cap: "Presence of DIHs in Toronto Libraries"
 #| message: false
 #| echo: false
 
@@ -253,59 +269,63 @@ data |> ggplot(aes(x = dih)) +
   theme_minimal()
 ```
 
-```{r}
+```{r, fig.pos="H"}
 #| label: fig-area
-#| tbl-cap: "Distribution of Total Areas of Libraries in Toronto"
+#| fig-cap: "Distribution of Total Areas of Libraries in Toronto"
 #| message: false
 #| echo: false
 
 data |> ggplot(aes(x = area)) +
   geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
-  labs(x = "Total Area", y = "# of Libraries") +
+  labs(x = "Total Area of the Library", y = "# of Libraries") +
   theme_minimal()
 ```
 
-```{r}
+```{r, fig.pos="H"}
 #| label: fig-parking
-#| tbl-cap: "Distribution of Number of Parking Spaces at Libraries in Toronto"
+#| fig-cap: "Distribution of Number of Parking Spaces at Libraries in Toronto"
 #| message: false
 #| echo: false
 
 data |> ggplot(aes(x = parking)) +
   geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
-  labs(x = "# of Parking Spaces", y = "# of Libraries") +
+  labs(x = "# of Parking Spaces in the Library", y = "# of Libraries") +
   theme_minimal()
 ```
 
-```{r}
+```{r, fig.pos="H"}
 #| label: fig-workstations
-#| tbl-cap: "Distribution of Number of Workstations in Libraries in Toronto"
+#| fig-cap: "Distribution of Number of Workstations in Libraries in Toronto"
 #| message: false
 #| echo: false
 
 data |> ggplot(aes(x = workstations)) +
   geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
-  labs(x = "# of Workstations", y = "# of Libraries") +
+  labs(x = "# of Workstations in the Library", y = "# of Libraries") +
   theme_minimal()
 ```
 
-```{r}
+```{r, fig.pos="H"}
 #| label: fig-year
-#| tbl-cap: "Distribution of Age of Libraries in Toronto"
+#| fig-cap: "Distribution of Age of Libraries in Toronto"
 #| message: false
 #| echo: false
 
 data |> ggplot(aes(x = year)) +
   geom_histogram(col = "lightblue", fill = "lightblue", alpha = 0.8) +
-  labs(x = "Age", y = "# of Libraries") +
+  labs(x = "Age of the Library", y = "# of Libraries") +
   theme_minimal()
 ```
 
 # Model Details {#sec-md}
 
-```{r}
+## Distribution of Posterior
+
+The distribution of posterior is shown in @fig-posterior, which aligns with the actual data. From the graph, we can see that more libraries does not have a DIH.
+
+```{r, fig.pos="H"}
 #| label: fig-posterior
-#| fig-cap: Posterior Distribution for the Logistic Regression Model 
+#| fig-cap: "Posterior Distribution for the Logistic Regression Model"
 #| echo: false
 #| warning: false
 #| message: false
@@ -314,16 +334,61 @@ pp_check(model) +
   theme_minimal()
 ```
 
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
+## Density Plots
 
-pred <- fitted(model)
-RMSE <- round(sqrt(mean((data$dih - pred) ^ 2)), 3)
+From @fig-area-dih, we could see that smaller libraries are likely to have no DIHs, while larger libraries are not sure to have DIHs. In @fig-parking-dih and @fig-workstations-dih, libraries with more parking spaces and workstations tends to have a DIH. On the opposite, the pattern shown in @fig-year-dih tells us older libraries tend to have no DIH.
+
+```{r, fig.pos="H"}
+#| label: fig-area-dih
+#| tbl-cap: "Density of `area` Categorized by Presence of DIHs"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = area, fill = as.factor(dih))) +
+  geom_density(alpha = 0.5) +
+  labs(x = "Total Area of the Library", y = "Density", 
+       fill = "Presence of DIHs (0 = No, 1 = Yes)") +
+  theme_minimal()
 ```
 
-The distribution of posterior is shown in @fig-posterior, which aligns with the actual data. From the graph, we can see that more libraries does not have a DIH. The $RMSE$ for our model is about `r RMSE`, which is a quite small value, meaning the model fits the data quite well.
+```{r, fig.pos="H"}
+#| label: fig-parking-dih
+#| tbl-cap: "Density of `parking` Categorized by Presence of DIHs"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = parking, fill = as.factor(dih))) +
+  geom_density(alpha = 0.5) +
+  labs(x = "# of Parking Spaces in the Library", y = "Density", 
+       fill = "Presence of DIHs (0 = No, 1 = Yes)") +
+  theme_minimal()
+```
+
+```{r, fig.pos="H"}
+#| label: fig-workstations-dih
+#| tbl-cap: "Density of `workstations` Categorized by Presence of DIHs"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = workstations, fill = as.factor(dih))) +
+  geom_density(alpha = 0.5) +
+  labs(x = "# of Workstations in the Library", y = "Density", 
+       fill = "Presence of DIHs (0 = No, 1 = Yes)") +
+  theme_minimal()
+```
+
+```{r, fig.pos="H"}
+#| label: fig-year-dih
+#| tbl-cap: "Density of `year` Categorized by Presence of DIHs"
+#| message: false
+#| echo: false
+
+data |> ggplot(aes(x = year, fill = as.factor(dih))) +
+  geom_density(alpha = 0.5) +
+  labs(x = "Age of the Library", y = "Density", 
+       fill = "Presence of DIHs (0 = No, 1 = Yes)") +
+  theme_minimal()
+```
 
 \newpage
 
