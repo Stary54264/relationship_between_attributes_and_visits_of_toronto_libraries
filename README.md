@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repo contains a study that examines the factors influencing the presence of Digital Innovation Hubs (DIHs) in libraries. Using the dataset from Open Data Toronto, a logistic regression model was built to do analysis.
+This repo contains a study that examines the factors influencing the presence of Digital Innovation Hubs (DIHs) in Toronto libraries. Using the dataset from Open Data Toronto, a logistic regression model was built to do analysis.
 
 
 ## File Structure
