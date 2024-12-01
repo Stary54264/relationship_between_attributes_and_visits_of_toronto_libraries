@@ -74,7 +74,7 @@ A thorough discussion of measurement, relating to the dataset, is provided in th
 
 Present the model clearly using appropriate mathematical notation and plain English explanations, defining every component. Ensure the model is well-explained, justified, appropriate, and balanced in complexity—neither overly simplistic nor unnecessarily complicated—for the situation. Variables should be well-defined and correspond with those in the data section. Explain how modeling decisions reflect aspects discussed in the data section, including why specific features are included (e.g., using age rather than age groups, treating province effects as levels, categorizing gender). If applicable, define and justify sensible priors for Bayesian models. Clearly discuss underlying assumptions, potential limitations, and situations where the model may not be appropriate. Mention the software used to implement the model, and provide evidence of model validation and checking—such as out-of-sample testing, RMSE calculations, test/training splits, or sensitivity analyses—addressing model convergence and diagnostics (although much of the detail make be in the appendix). Include any alternative models or variants considered, their strengths and weaknesses, and the rationale for the final model choice.
 
-- [ ] Results
+- [X] Results
 
 Results will likely require summary statistics, tables, graphs, images, and possibly statistical analysis or maps. There should also be text associated with all these aspects. Show the reader the results by plotting them where possible. Talk about them. Explain them. That said, this section should strictly relay results. Regression tables must not contain stars. Use modelsummary to include a table and graph of the estimates.
 
@@ -86,15 +86,15 @@ Some questions that a good discussion would cover include (each of these would b
 
 All aspects of submission should be free of noticeable typos, spelling mistakes, and be grammatically correct. Prose should be coherent, concise, clear, and mature. Remove unnecessary words. Do not use the following words/phrases: 'advanced', 'all-encompassing', 'apt', 'backdrop', 'beg the question', 'bridge/s the/a gap', comprehensive', 'critical', 'crucial', 'data-driven', 'delve/s', 'drastic', 'drives forward', 'elucidate/ing', 'embark/s', 'exploration', 'fill that/the/a gap', 'fresh perspective/s', 'hidden factor/s', 'imperative', 'insights from', 'insight/s', 'interrogate', 'intricate', 'intriguing', 'key insights', 'kind of', 'leverage', 'meticulous/ly', 'multifaceted', 'novel', 'nuance', 'offers/ing crucial insight', 'plummeted', 'profound', 'rapidly', 'reveals', 'shed/s light', 'shocking', 'soared', 'unparalleled', 'unveiling', 'valuable', 'wanna'.
 
-- [ ] Cross-references
+- [X] Cross-references
 
 All figures, tables, and equations, should be numbered, and referred to in the text using cross-references. The telegraphing paragraph in the introduction should cross reference the rest of the paper.
 
-- [ ] Captions
+- [X] Captions
 
 All figures and tables have detailed and meaningful captions. They should be sufficiently detailed so as to make the main point of the figure/table clear even without the accompanying text. Do not say 'Histogram of...' or whatever else the figure type is.
 
-- [ ] Graphs/tables/etc
+- [X] Graphs/tables/etc
 
 Graphs and tables must be included in the paper and should be to well-formatted, clear, and digestible. Graphs should be made using ggplot2 and tables should be made using tinytable. They should serve a clear purpose and be fully self-contained. Graphs and tables should be appropriately sized, colored, and labelled. Variable names should not be used as labels. Tables should have an appropriate number of decimal places and use comma separators for thousands. Don't use boxplots, but if you must then you must overlay the actual data.
 
@@ -102,11 +102,11 @@ Graphs and tables must be included in the paper and should be to well-formatted,
 
 Please include an appendix where you focus on some aspect of surveys, sampling or observational data, related to your paper. This should be an in-depth exploration, akin to the "idealized methodology/survey/pollster methodology" sections of Paper 2. Some aspect of this is likely covered in the Measurement sub-section of your Data section, but this would be much more detailed, and might include aspects like simulation and linkages to the literature, among other aspects.
 
-- [ ] Referencing
+- [X] Referencing
 
 All data, software, literature, and any other relevant material, should be cited in-text and included in a properly formatted reference list made using BibTeX. A few lines of code from Stack Overflow or similar, would be acknowledged just with a comment in the script immediately preceding the use of the code rather than here. But larger chunks of code should be fully acknowledged with an in-text citation and appear in the reference list. Check in-text citations and that you have not accidentally used (@my_cite) when you needed [@my_cite]. R packages and all other aspects should be correctly capitalized, and name should be correct e.g. use double braces appropriately in the BibTeX file.
 
-- [ ] Commits
+- [X] Commits
 
 There are at least a handful of different commits, and they have meaningful commit messages.
 
@@ -134,5 +134,5 @@ Use an organized repo with a detailed README and an R project. Thoroughly docume
 
 You should pick at least one of the following and include it to enhance your submission: 1) a datasheet for the dataset; 2) a model card for the model; 3) a Shiny application; 4) an R package; or 5) an API for the model. If you would like to include an enhancement not on this list please email the instructor with your idea.
 
-- [ ] Miscellaneous
+- [X] Miscellaneous
 There are always students that excel in a way that is not anticipated in the rubric. This item accounts for that.
