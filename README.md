@@ -130,7 +130,7 @@ The analysis dataset is saved as a parquet file. (The raw data should be saved i
 
 Use an organized repo with a detailed README and an R project. Thoroughly document code and include a preamble, comments, nice structure, and style code with styler or lintr. Use seeds appropriately. Avoid leaving install.packages() in the code unless handled sophisticatedly. Exclude unnecessary files from the repo; avoid hard-coded paths and setwd(). Use base pipe not magrittr pipe. Comment on and close all GitHub issues. Deal with all branches.
 
-- [ ] Enhancements
+- [X] Enhancements
 
 You should pick at least one of the following and include it to enhance your submission: 1) a datasheet for the dataset; 2) a model card for the model; 3) a Shiny application; 4) an R package; or 5) an API for the model. If you would like to include an enhancement not on this list please email the instructor with your idea.
 
