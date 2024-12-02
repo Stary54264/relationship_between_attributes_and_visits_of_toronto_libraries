@@ -78,7 +78,7 @@ Present the model clearly using appropriate mathematical notation and plain Engl
 
 Results will likely require summary statistics, tables, graphs, images, and possibly statistical analysis or maps. There should also be text associated with all these aspects. Show the reader the results by plotting them where possible. Talk about them. Explain them. That said, this section should strictly relay results. Regression tables must not contain stars. Use modelsummary to include a table and graph of the estimates.
 
-- [ ] Discussion
+- [X] Discussion
 
 Some questions that a good discussion would cover include (each of these would be a sub-section of something like half a page to a page): What is done in this paper? What is something that we learn about the world? What is another thing that we learn about the world? What are some weaknesses of what was done? What is left to learn or how should we proceed in the future?
 
