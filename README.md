@@ -66,7 +66,7 @@ The estimand is clearly stated, in its own paragraph, in the introduction.
 
 A sense of the dataset should be communicated to the reader. The broader context of the dataset should be discussed. All variables should be thoroughly examined and explained. Explain if there were similar datasets that could have been used and why they were not. If variables were constructed then this should be mentioned, and high-level cleaning aspects of note should be mentioned, but this section should focus on the destination, not the journey. It is important to understand what the variables look like by including graphs, and possibly tables, of all observations, along with discussion of those graphs and the other features of these data. Summary statistics should also be included, and well as any relationships between the variables. You are not doing EDA in this section--you are talking the reader through the variables that are of interest. If this becomes too detailed, then appendices could be used. Basically, for every variable in your dataset that is of interest to your paper there needs to be graphs and explanation and maybe tables.
 
-- [ ] Measurement
+- [X] Measurement
 
 A thorough discussion of measurement, relating to the dataset, is provided in the data section. Please ensure that you explain how we went from some phenomena in the world that happened to an entry in the dataset that you are interested in.
 
