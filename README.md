@@ -82,7 +82,7 @@ Results will likely require summary statistics, tables, graphs, images, and poss
 
 Some questions that a good discussion would cover include (each of these would be a sub-section of something like half a page to a page): What is done in this paper? What is something that we learn about the world? What is another thing that we learn about the world? What are some weaknesses of what was done? What is left to learn or how should we proceed in the future?
 
-- [ ] Prose
+- [X] Prose
 
 All aspects of submission should be free of noticeable typos, spelling mistakes, and be grammatically correct. Prose should be coherent, concise, clear, and mature. Remove unnecessary words. Do not use the following words/phrases: 'advanced', 'all-encompassing', 'apt', 'backdrop', 'beg the question', 'bridge/s the/a gap', comprehensive', 'critical', 'crucial', 'data-driven', 'delve/s', 'drastic', 'drives forward', 'elucidate/ing', 'embark/s', 'exploration', 'fill that/the/a gap', 'fresh perspective/s', 'hidden factor/s', 'imperative', 'insights from', 'insight/s', 'interrogate', 'intricate', 'intriguing', 'key insights', 'kind of', 'leverage', 'meticulous/ly', 'multifaceted', 'novel', 'nuance', 'offers/ing crucial insight', 'plummeted', 'profound', 'rapidly', 'reveals', 'shed/s light', 'shocking', 'soared', 'unparalleled', 'unveiling', 'valuable', 'wanna'.
 
