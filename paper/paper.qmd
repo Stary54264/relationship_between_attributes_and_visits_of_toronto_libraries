@@ -53,8 +53,8 @@ The estimand in this paper is the presence of a Digital Innovation Hub (DIH) in 
 #| warning: false
 #| message: false
 
-data <- read_parquet(
-  here::here("data/02-analysis_data/analysis_data.parquet"))
+data <-
+  read_parquet(here::here("data/02-analysis_data/analysis_data.parquet"))
 ```
  
 This report uses a dataset collected by the Toronto Public Library [@library] and posted on Open Data Toronto [@data]. [@tbl-data] is a preview of the dataset. These data provide clarity into the physical attributes and temporal characteristics of libraries that may house DIHs. Alternative datasets, such as those focusing on municipal buildings or educational institutions, were considered but ultimately not used because libraries are more accessible to the public, thus having a bigger impact on society. The dataset includes predictor variables including library area, public parking spots, the number of workstations, and the year the library was built. Data on these variables would be used to predict the outcome variable - the presence of DIHs.
@@ -401,7 +401,7 @@ From @fig-area-dih, we could see that smaller libraries are likely to have no DI
 
 data |> ggplot(aes(x = area, fill = as.factor(dih))) +
   geom_density(alpha = 0.5) +
-  labs(x = "Total Area of the Library", y = "Density", 
+  labs(x = "Total Area of the Library", y = "Density",
        fill = "Presence of DIHs (0 = No, 1 = Yes)") +
   theme_minimal()
 ```
@@ -414,7 +414,7 @@ data |> ggplot(aes(x = area, fill = as.factor(dih))) +
 
 data |> ggplot(aes(x = parking, fill = as.factor(dih))) +
   geom_density(alpha = 0.5) +
-  labs(x = "# of Parking Spaces in the Library", y = "Density", 
+  labs(x = "# of Parking Spaces in the Library", y = "Density",
        fill = "Presence of DIHs (0 = No, 1 = Yes)") +
   theme_minimal()
 ```
@@ -427,7 +427,7 @@ data |> ggplot(aes(x = parking, fill = as.factor(dih))) +
 
 data |> ggplot(aes(x = workstations, fill = as.factor(dih))) +
   geom_density(alpha = 0.5) +
-  labs(x = "# of Workstations in the Library", y = "Density", 
+  labs(x = "# of Workstations in the Library", y = "Density",
        fill = "Presence of DIHs (0 = No, 1 = Yes)") +
   theme_minimal()
 ```
@@ -440,7 +440,7 @@ data |> ggplot(aes(x = workstations, fill = as.factor(dih))) +
 
 data |> ggplot(aes(x = year, fill = as.factor(dih))) +
   geom_density(alpha = 0.5) +
-  labs(x = "Age of the Library", y = "Density", 
+  labs(x = "Age of the Library", y = "Density",
        fill = "Presence of DIHs (0 = No, 1 = Yes)") +
   theme_minimal()
 ```
