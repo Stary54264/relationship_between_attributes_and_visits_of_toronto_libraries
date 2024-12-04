@@ -445,6 +445,100 @@ data |> ggplot(aes(x = year, fill = as.factor(dih))) +
   theme_minimal()
 ```
 
+# Survey, Sampling, and Observational Data
+
+This study relies on observational data to examine the determinants of DIH presence in libraries. While observational data are useful, it is prone to biases and limitations that may affect the validity of conclusions. Some methodological improvements focusing on credible data collection, rigorous sampling, and thoughtful use of survey methods could be made to ensure robust and generalizable findings.
+
+## Observational Data Challenges
+
+Observational data often reflects phenomena in the real world but is susceptible to selection bias, confounding variables, and measurement errors. For example, in this study, libraries without detailed reporting may be underrepresented, skewing the analysis toward better-documented institutions. Also, variables such as "workstations" or "parking" might act as proxies for broader socioeconomic factors, but these relationships are not directly observed.
+
+## Idealized Methodology for Data Collection
+
+### Stratified Sampling
+
+Libraries could be stratified by key characteristics such as region, funding, and community size to mitigate biases and improve representativeness. Within each stratum, random sampling ensures proportional representation while reducing over-sampling in areas with higher reporting frequency.
+
+### Longitudinal Data Collection
+
+A cross-sectional approach only captures a single point in time. However, transitioning to a longitudinal design would enable us to observe how changes in library resources impact DIH presence over time and establish causality between predictors and outcomes.
+
+### Survey Design
+
+Although the data was obtained directly from the libraries, we could still design a survey to collect data. A carefully designed survey could gather valid data. Some approaches include using simple, jargon-free questions with clear response options, starting with general questions and moving to specifics, and retesting questions to ensure reliability and consistency across diverse respondents.
+
+## Simulation for Missing Data
+
+Missing or incomplete data often plagues observational studies. A simulation approach could impute missing values based on observed distributions of similar libraries and model the impact of missing data to assess potential biases in conclusions.
+
+## Sample Pollster
+
+We are conducting a survey to understand the factors influencing the presence of Digital Innovation Hubs (DIHs) in libraries. The information you provided will help shape policies and strategies to enhance library services nationwide. This survey will take approximately 5 minutes to complete. All responses will remain confidential and will only be used for academic research purposes.  
+
+If you have any questions about the survey, please contact Yanzun Jiang at [yanzun.jiang@mail.utoronto.ca](mailto:yanzun.jiang@mail.utoronto.ca). Thank you for your participation!
+
+1. What is the name of your library?
+
+2. How many full-time staff members does your library employ?
+   - [ ] 1-5
+   - [ ] 6-10
+   - [ ] 11-20
+   - [ ] More than 20
+
+3. Does your library have a Digital Innovation Hub?
+   - [ ] Yes
+   - [ ] No
+
+4. If no, are there plans to establish a Digital Innovation Hub in the future?
+   - [ ] Yes, within the next year
+   - [ ] Yes, within the next 5 years
+   - [ ] No current plans
+
+5. What year was the library established?
+
+6. What is the approximate size of your library's main facility (in square feet)?
+
+7. How many computer workstations are available for public use in your library?
+
+8. Does your library provide parking for visitors?
+    - [ ] Yes
+    - [ ] No
+
+9. For this question, please choose Apple.  
+    - [ ] Apple
+    - [ ] Orange
+    - [ ] Banana
+    - [ ] Peach
+
+10. Which of the following services does your library currently offer? (Select all that apply)
+    - [ ] 3D printing
+    - [ ] Virtual reality equipment
+    - [ ] Coding workshops
+    - [ ] Audio/visual production tools
+    - [ ] Robotics and electronics kits
+    - [ ] Other (please specify):
+
+12. How would you rate your library’s funding for digital services?
+    - [ ] Excellent
+    - [ ] Good
+    - [ ] Fair
+    - [ ] Poor
+
+13. What challenges does your library face in implementing or maintaining a Digital Innovation Hub? (Select all that apply)
+    - [ ] Lack of funding
+    - [ ] Lack of skilled staff
+    - [ ] Limited space
+    - [ ] Insufficient community interest
+    - [ ] Other (please specify):
+
+14. Would you like your response to be included in a study?
+    - [ ] Yes
+    - [ ] No
+
+15. (Optional) Please share any additional comments or suggestions about Digital Innovation Hubs in libraries:
+
+Thank you for completing this survey! We appreciate your time and suggestions.
+
 \newpage
 
 # References
